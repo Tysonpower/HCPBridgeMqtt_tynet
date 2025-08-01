@@ -45,6 +45,8 @@ If you use a PCB from us, you can get started with our instructions: [Getting st
 
 Would you like to use our ESPHome-based firmware, which offers a few advantages? See our guide: [Getting started with ESPHome](docs/getting_started_esphome.md)
 
+You can find prebuild firmware for our boards in the Firmware folder as non-ESPHome as well as ESPHome version.
+
 ## ... or ...
 
 # Build it yourself! 🔨

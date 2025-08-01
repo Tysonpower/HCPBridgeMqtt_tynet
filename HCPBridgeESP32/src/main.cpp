@@ -29,6 +29,7 @@ extern "C" {
   #include <Adafruit_Sensor.h>
   #include <DHT.h>
 #endif
+#include <WiFi.h>
 
 // webserver on port 80
 AsyncWebServer server(80);

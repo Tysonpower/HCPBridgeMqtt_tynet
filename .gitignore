@@ -2,7 +2,6 @@
 /.pio
 .pio
 *.bak
-*.bin
 testAsyncReconnect.cpp
 configTest.h
 CMakeLists.txt
