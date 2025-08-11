@@ -32,12 +32,12 @@ The main steps are:
 
 Our boards all ship with an Arduino-based based firmware, which can be easily upgraded.
 
-1. Download the ESPHome-based firmware file: [hcpbridge.ota.bin](https://github.com/Tysonpower/HCPBridgeMqtt_tynet/raw/refs/heads/main/hcpbridge.ota.bin)
+1. Download the ESPHome-based firmware file: [hcpbridge.ota.bin](https://github.com/Tysonpower/HCPBridgeMqtt_tynet/blob/main/Firmware/esphome/hcpbridge-e4.ota.bin)
 2. Connect the board to power via the USB-C connector and wait a few seconds. The 3V3 LED will be lit.
 3. With a phone or a PC, search and connect to the Wi-Fi network called "HCPBRIDGE" created by the PCB.
 4. Open the OTA Web UI: [http://192.168.4.1/update](http://192.168.4.1/update)
 5. If asked, use the following credentials to login: `user: admin` and `pass: admin`
-6. Click "Select File", navigate to the downloaded `hcpbridge.ota.bin` file\
+6. Click "Select File", navigate to the downloaded `hcpbridge-e4.ota.bin` file\
    ![ElegantOTA upload page](Images/OTA-overview.png)
 7. Wait for the upload to complete\
    ![ElegantOTA progress page](Images/OTA-progress.png)\
