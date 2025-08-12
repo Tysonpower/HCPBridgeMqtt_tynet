@@ -935,6 +935,17 @@ const char* generateUniqueID() {
    return uniqueID;
 }
 
+bool requireAuth(AsyncWebServerRequest* request) {
+  String webpass = localPrefs->getString(preference_www_password);
+  if(webpass != "") {
+    if (request->authenticate(WWW_USER, webpass.c_str())) return true;
+    request->requestAuthentication();   // send 401 + WWW-Authenticate Header
+    return false;
+  } else {
+    return true;
+  }
+}
+
 // setup mcu
 void setup()
 {
@@ -1050,15 +1061,16 @@ void setup()
       0);        /* Core where the task should run */
   #endif
 
-
   // setup http server
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
             {
+              if (!requireAuth(request)) return;
               AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", index_html, sizeof(index_html));
               response->addHeader("Content-Encoding", "deflate");
               request->send(response); });
 
   server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request){
+              if (!requireAuth(request)) return;
               //const SHCIState &doorstate = emulator.getState();
               AsyncResponseStream *response = request->beginResponseStream("application/json");
               JsonDocument root;
@@ -1112,12 +1124,14 @@ void setup()
               request->send(response); });
 
   server.on("/statush", HTTP_GET, [](AsyncWebServerRequest *request){
+              if (!requireAuth(request)) return;
               AsyncResponseStream *response = request->beginResponseStream("application/json");
               response->print(hoermannEngine->state->toStatusJson());
               request->send(response); });
 
   server.on("/command", HTTP_GET, [](AsyncWebServerRequest *request)
             {
+              if (!requireAuth(request)) return;
               if (request->hasParam("action"))
               {
                 int actionid = request->getParam("action")->value().toInt();
@@ -1177,6 +1191,7 @@ void setup()
   
   server.on("/config", HTTP_GET, [](AsyncWebServerRequest *request)
             {
+              if (!requireAuth(request)) return;
               Serial.println("GET CONFIG");
               AsyncResponseStream *response = request->beginResponseStream("application/json");
               JsonDocument conf;
@@ -1187,6 +1202,7 @@ void setup()
   // load requestbody for json Post requests
   server.onRequestBody([](AsyncWebServerRequest * request, uint8_t *data, size_t len, size_t index, size_t total)
           {
+          if (!requireAuth(request)) return;
           // Handle setting config request
           if (request->url() == "/config")
           {
@@ -1198,6 +1214,7 @@ void setup()
           } });
   server.on("/reset", HTTP_GET, [](AsyncWebServerRequest *request)
         {
+          if (!requireAuth(request)) return;
           Serial.println("GET reset");
           AsyncResponseStream *response = request->beginResponseStream("application/json");
           JsonDocument root;

@@ -9,6 +9,8 @@
     const char* STA_SSID   = "";
     const char* STA_PASSWD = "";
     const char* AP_PASSWD = "tynet.eu";
+    const char* WWW_USER = "admin";
+    const char* WWW_PASSWD = "";
 
     //RS485 pins
     #ifdef CONFIG_IDF_TARGET_ESP32S3
@@ -74,8 +76,8 @@
     #define I2C_SCL 5
 
     //HC-SR04                   
-    #define SR04_TRIGPIN 5
-    #define SR04_ECHOPIN 18
+    #define SR04_TRIGPIN 7
+    #define SR04_ECHOPIN 8
     #define SR04_MAXDISTANCECM 150
     #define SOUND_SPEED 0.034   //define sound speed in cm/uS
 

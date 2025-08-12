@@ -21,6 +21,7 @@
 #define preference_wifi_ap_mode "wifi_ap_enabled"
 #define preference_wifi_ssid "wifi_ssid"
 #define preference_wifi_password "wifi_pass"
+#define preference_www_password "www_pass"
 #define preference_wifi_ap_password "wifi_ap_pass"
 #define preference_hostname "hostname"  //todo needs to be added in the Webui
 
@@ -59,7 +60,7 @@
 
 std::vector<const char*> _keys =
 {
-        preference_started_before, preference_rs485_txd, preference_rs485_rxd, preference_wifi_ap_mode, preference_wifi_ssid, preference_wifi_password, preference_wifi_ap_password, preference_gd_id, 
+        preference_started_before, preference_rs485_txd, preference_rs485_rxd, preference_wifi_ap_mode, preference_wifi_ssid, preference_wifi_password, preference_www_password, preference_wifi_ap_password, preference_gd_id, 
         preference_gd_name, preference_mqtt_server, preference_mqtt_server_port,
         preference_mqtt_user, preference_mqtt_password, preference_query_interval_sensors, preference_hostname,
         preference_gd_avail, preference_gd_light, preference_gd_vent, preference_gd_half, preference_gd_status, preference_gd_det_status,
@@ -73,7 +74,7 @@ std::vector<const char*> _keys =
 
 std::vector<const char*> _strings =
 {
-        preference_started_before, preference_wifi_ap_mode, preference_wifi_ssid, preference_wifi_password, preference_wifi_ap_password,
+        preference_started_before, preference_wifi_ap_mode, preference_wifi_ssid, preference_wifi_password, preference_www_password, preference_wifi_ap_password,
         preference_gd_id, preference_gd_name, preference_mqtt_server,
         preference_mqtt_user, preference_mqtt_password, preference_hostname, 
         preference_gd_avail, preference_gd_light, preference_gd_vent, preference_gd_half, preference_gd_status, preference_gd_det_status,
@@ -91,7 +92,7 @@ std::vector<const char*> _ints =
 
 std::vector<const char*> _redact =
 {
-    preference_wifi_password, preference_mqtt_user, preference_mqtt_password,
+    preference_wifi_password, preference_www_password, preference_mqtt_user, preference_mqtt_password,
 };
 std::vector<const char*> _boolPrefs =
 {
@@ -151,6 +152,7 @@ class PreferenceHandler{
             preferences->putBool(preference_wifi_ap_mode, AP_ACTIF);
             preferences->putString(preference_wifi_ssid, STA_SSID);
             preferences->putString(preference_wifi_password, STA_PASSWD);
+            preferences->putString(preference_www_password, WWW_PASSWD);
             preferences->putString(preference_mqtt_password, MQTTPASSWORD);
             preferences->putString(preference_mqtt_server, MQTTSERVER);
             preferences->putString(preference_mqtt_user, MQTTUSER);
@@ -259,6 +261,7 @@ class PreferenceHandler{
         String apactif = doc[preference_wifi_ap_mode].as<String>();
         String ssid = doc[preference_wifi_ssid].as<String>();
         String pass = doc[preference_wifi_password].as<String>();
+        String www_pass = doc[preference_www_password].as<String>();
         String mqtt_server = doc[preference_mqtt_server].as<String>();
         int mqtt_port = doc[preference_mqtt_server_port].as<int>();
         String mqtt_user = doc[preference_mqtt_user].as<String>();
@@ -311,6 +314,11 @@ class PreferenceHandler{
             if(pass != "*"){
                 //* stands for password not changed
                 this->preferences->putString(preference_wifi_password, pass);
+            }
+
+             if(www_pass != "*"){
+                //* stands for password not changed
+                this->preferences->putString(preference_www_password, www_pass);
             }
 
             if (mqtt_pass != "*"){
@@ -461,6 +469,12 @@ class PreferenceHandler{
             conf[preference_wifi_password] = "*";
         }else{
             conf[preference_wifi_password] = "";
+        }
+        if (this->preferences->getString(preference_www_password).length() != 0){
+            //if preferences have been set then return *
+            conf[preference_www_password] = "*";
+        }else{
+            conf[preference_www_password] = "";
         }
         if (this->preferences->getString(preference_mqtt_password).length() != 0){
             //if preferences have been set then return *
