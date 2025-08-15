@@ -6,6 +6,8 @@ If you are one of the few people that have an issue with the firmware or just wa
 
 ESPHome uses a native Home Assistant API instead of MQTT and is simple to set up. We also provide configuration files as well as ready to flash .bin files for our boards.
 
+The default login to the ESPHome provided WEBUI is user: `admin` and pass: `tynet.eu`
+
 ## Advantages over the Arduino-based firmware
 
 - More stable, especially with weak Wi-Fi signals
