@@ -103,6 +103,8 @@ TimerHandle_t wifiReconnectTimer;
 char lastCommandTopic[64];
 char lastCommandPayload[64];
 
+HoermannState::State lastDoorState;
+
 PreferenceHandler prefHandler;
 Preferences *localPrefs = nullptr;
 
@@ -117,6 +119,7 @@ class MqttStrings {
     char door_topic [64];
     char vent_topic [64];
     char half_topic [64];
+    char step_topic [64];
     char sensor_topic [64];
     char debug_topic [64];
     String st_availability_topic;
@@ -130,6 +133,7 @@ class MqttStrings {
     String st_door_topic;
     String st_vent_topic;
     String st_half_topic;
+    String st_step_topic;
     String st_sensor_topic;
     String st_debug_topic;   
 };
@@ -168,6 +172,7 @@ void setuptMqttStrings(){
   mqttStrings.st_door_topic = mqttStrings.st_cmd_topic  + "/door";
   mqttStrings.st_vent_topic = mqttStrings.st_cmd_topic  + "/vent";
   mqttStrings.st_half_topic = mqttStrings.st_cmd_topic  + "/half";
+  mqttStrings.st_step_topic = mqttStrings.st_cmd_topic  + "/step";
   mqttStrings.st_sensor_topic = ftopic + "/sensor";
   mqttStrings.st_debug_topic = ftopic + "/debug";
 
@@ -180,6 +185,7 @@ void setuptMqttStrings(){
   strcpy(mqttStrings.door_topic, mqttStrings.st_door_topic.c_str());
   strcpy(mqttStrings.vent_topic, mqttStrings.st_vent_topic.c_str());
   strcpy(mqttStrings.half_topic, mqttStrings.st_half_topic.c_str());
+  strcpy(mqttStrings.step_topic, mqttStrings.st_step_topic.c_str());
   strcpy(mqttStrings.sensor_topic, mqttStrings.st_sensor_topic.c_str());
   strcpy(mqttStrings.debug_topic, mqttStrings.st_debug_topic.c_str());
 }
@@ -215,7 +221,7 @@ void connectToWifi() {
   if (localPrefs->getString(preference_wifi_ssid) != "")
   {
     Serial.println("Connecting to Wi-Fi...");
-    WiFi.begin(localPrefs->getString(preference_wifi_ssid).c_str(), localPrefs->getString(preference_wifi_password).c_str());
+    WiFi.begin(localPrefs->getString(preference_wifi_ssid).c_str(), localPrefs->getString(preference_wifi_password).c_str(), 0, nullptr, true);
   } else
   {
     Serial.println("No WiFi Client enabled");
@@ -366,7 +372,7 @@ void onMqttMessage(char *topic, char *payload, AsyncMqttClientMessageProperties 
       hoermannEngine->toogleLight();
     }
   }
-  else if (strcmp(mqttStrings.door_topic, topic) == 0 || strcmp(mqttStrings.vent_topic, topic) == 0 || strcmp(mqttStrings.half_topic, topic) == 0){
+  else if (strcmp(mqttStrings.door_topic, topic) == 0 || strcmp(mqttStrings.vent_topic, topic) == 0 || strcmp(mqttStrings.half_topic, topic) == 0 || strcmp(mqttStrings.step_topic, topic) == 0){
     if (strncmp(payload, HA_OPEN, len) == 0){
       hoermannEngine->openDoor();
     }
@@ -381,6 +387,26 @@ void onMqttMessage(char *topic, char *payload, AsyncMqttClientMessageProperties 
     }
     else if (strncmp(payload, HA_VENT, len) == 0){
       hoermannEngine->ventilationPositionDoor();
+    }
+    else if (strncmp(payload, HA_STEP, len) == 0){
+      Serial.println("STEPPING...");
+      HoermannState::State currState = hoermannEngine->state->state;
+      Serial.println(currState);
+      // Step between open/stop/close
+      if(currState == HoermannState::State::CLOSED) {
+        hoermannEngine->openDoor();
+      }
+      else if(currState == HoermannState::State::OPEN) {
+        hoermannEngine->closeDoor();
+      }
+      else if(currState == HoermannState::State::CLOSING || currState == HoermannState::State::OPENING) {
+        lastDoorState = currState;
+        hoermannEngine->stopDoor();
+      } else if(currState == HoermannState::State::STOPPED  && lastDoorState  == HoermannState::State::OPENING) {
+        hoermannEngine->closeDoor();
+      } else if(currState == HoermannState::State::STOPPED  && lastDoorState  == HoermannState::State::CLOSING) {
+        hoermannEngine->openDoor();
+      }
     }
   }
   else if (strcmp(mqttStrings.setpos_topic, topic) == 0){
@@ -615,6 +641,7 @@ void sendDiscoveryMessageForCover(const char name[], const char topic[], const J
   doc["payload_open"] = HA_OPEN;
   doc["payload_close"] = HA_CLOSE;
   doc["payload_stop"] = HA_STOP;
+  doc["payload_step"] = HA_STEP;
   #ifdef AlignToOpenHab
     doc["value_template"] = "{{ value_json.doorposition }}";
   #else
@@ -654,6 +681,7 @@ void sendDiscoveryMessage()
   sendDiscoveryMessageForBinarySensor(localPrefs->getString(preference_gd_light).c_str(), mqttStrings.state_topic, "lamp", HA_OFF, HA_ON, device);
   sendDiscoveryMessageForSwitch(localPrefs->getString(preference_gd_vent).c_str(), HA_DISCOVERY_SWITCH, "vent", HA_CLOSE, HA_VENT, "mdi:air-filter", device);
   sendDiscoveryMessageForSwitch(localPrefs->getString(preference_gd_half).c_str(), HA_DISCOVERY_SWITCH, "half", HA_CLOSE, HA_HALF, "mdi:air-filter", device);
+  sendDiscoveryMessageForSwitch(localPrefs->getString(preference_gd_step).c_str(), HA_DISCOVERY_SWITCH, "step", HA_STEP, HA_STEP, "mdi:remote", device);
   sendDiscoveryMessageForCover(localPrefs->getString(preference_gd_name).c_str(), "door", device);
 
   sendDiscoveryMessageForSensor(localPrefs->getString(preference_gd_status).c_str(), mqttStrings.state_topic, "doorstate", device, "enum");

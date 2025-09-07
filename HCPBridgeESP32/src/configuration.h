@@ -38,6 +38,7 @@
     const char GD_LIGHT[] = "Garage Door Light";
     const char GD_VENT[] = "Garage Door Vent";
     const char GD_HALF[] = "Garage Door Half";
+    const char GD_STEP[] = "Garage Door Step";
     const char GD_STATUS[] = "Garage Door Status";
     const char GD_DET_STATUS[] = "Garage Door detailed Status";
     const char GD_POSITIOM[] = "Garage Door Position";
@@ -106,6 +107,7 @@
         const char *HA_OFF = "false";
         const char *HA_OPEN = "open";
         const char *HA_CLOSE = "close";
+        const char *HA_STEP = "step";
         const char *HA_HALF = "half";
         const char *HA_HALFOPEN = "open h";
         const char *HA_VENT = "venting";
@@ -121,6 +123,7 @@
         const char *HA_OFF = "false";
         const char *HA_OPEN = "open";
         const char *HA_CLOSE = "close";
+        const char *HA_STEP = "step";
         const char *HA_HALF = "half";
         const char *HA_VENT = "venting";
         const char *HA_STOP = "STOP";
@@ -131,6 +134,6 @@
         const char *HA_ONLINE = "online";
         const char *HA_OFFLINE = "offline";
     #endif
-    const char *HA_VERSION = "0.0.8.0";
+    const char *HA_VERSION = "0.0.8.3";
 
 #endif
