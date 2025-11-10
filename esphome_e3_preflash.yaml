@@ -37,7 +37,7 @@ external_components:
       refresh: 0s
 
 esp32:
-  board: adafruit_feather_esp32s3
+  variant: esp32s3
   framework:
     type: esp-idf # mandatory for esp version
 
