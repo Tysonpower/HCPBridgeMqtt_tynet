@@ -33,8 +33,11 @@ esphome:
     monitor_filters: esp32_exception_decoder
 
 external_components:
-    - source: github://Tysonpower/hoermann_door
-      refresh: 0s
+  - source: github://Tysonpower/esphome-hcpbridge
+    refresh: 0s
+  - source: github://esphome/esphome@2025.9.3
+    refresh: 0s
+    components: [uart]
 
 esp32:
   variant: esp32s3
