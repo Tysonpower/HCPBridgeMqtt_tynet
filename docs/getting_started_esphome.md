@@ -20,16 +20,6 @@ The default login to the ESPHome provided WEBUI is user: `admin` and pass: `tyne
 - Half and vent position are available as button or switch depending on your preference
 - The vent position is not determined by a hardcoded 4% value, but by the status sent by the motor
 
-## Set up ESPHome in Home Assistant
-
-You can follow the [official guide](https://esphome.io/guides/getting_started_hassio) to install the ESPHome add-on for Home Assistant.
-
-The main steps are:
-
-1. Open your Home Assistant UI
-2. Go to Settings -> Add-Ons -> Add-on Store and search for ESPHome
-3. Install and activate the ESPHome Device Builder add-on
-
 ## Upgrade from the Arduino-based firmware
 
 Our boards all ship with an Arduino-based based firmware, which can be easily upgraded.
@@ -40,33 +30,19 @@ Our boards all ship with an Arduino-based based firmware, which can be easily up
 4. Open the OTA Web UI: [http://192.168.4.1/update](http://192.168.4.1/update)
 5. If asked, use the following credentials to login: `user: admin` and `pass: admin`
 6. Click "Select File", navigate to the downloaded `hcpbridge-e4.ota.bin` file\
+
    ![ElegantOTA upload page](Images/OTA-overview.png)
 7. Wait for the upload to complete\
+
    ![ElegantOTA progress page](Images/OTA-progress.png)\
    ![ElegantOTA success page](Images/OTA-success.png)
 
 ## Board setup
 
-### Using USB (recommended)
-
-1. Ensure your board is connected to your PC over USB-C
-2. Open [web.ESPHome.io](https://web.esphome.io), click connect and select the ESP32-S3 device from the list\
-   **NOTE**: On Linux, you may have to add yourself to the `dialout` user group (i.e. run `sudo usermod -a -G dialout $USER`)\
-   ![ESPHome connect page](Images/ESPHome-connect.png)\
-   ![ESPHome connect request](Images/ESPHome-connect-request.png)
-
-3. Click the kebab menu (⋮) and select Configure Wi-Fi, select or enter your Wi-Fi name and password
-   <img width="659" alt="image" src="https://github.com/user-attachments/assets/789d1c11-b7df-4c48-9421-5397f1cb5cc1">
-
-4. After entering your Wi-Fi credentials, click connect\
-   <img width="419" alt="image" src="https://github.com/user-attachments/assets/e22cbe8f-8ec8-42d8-8ec0-0d80b87ba629">
-5. Upon success, you should see the "Provisioned!" message\
-   ![ESPHome connect success](Images/ESPHome-success.png)
-
 ### Using Wi-Fi
 
 1. Ensure your board is powered over USB-C
-2. Search and connect to the Wi-Fi called `hcpbridge`
+2. Search and connect to the Wi-Fi that starts with `hcpbridge`
 3. Open http://192.168.4.1 when connected, login is `user: admin` and `pass: tynet.eu`
 4. Connect to your Wi-Fi network over the Web UI
 5. Your board should now be connected to your home network over Wi-Fi.
@@ -80,7 +56,21 @@ Open Home Assistant, go to Devices, here the garage door should be visible under
 > [!NOTE]
 > You can now use the PCB as is and don't need to do the following optional steps.
 
-## Recommended
+
+## For advanced Users
+
+### Set up ESPHome in Home Assistant (optional)
+
+You can follow the [official guide](https://esphome.io/guides/getting_started_hassio) to install the ESPHome add-on for Home Assistant.
+
+The main steps are:
+
+1. Open your Home Assistant UI
+2. Go to Settings -> Add-Ons -> Add-on Store and search for ESPHome
+3. Install and activate the ESPHome Device Builder add-on
+
+> [!NOTE]
+> If you can't install the Add-On - for example because you use Home Assistant on Dokcer - just leave this step out.
 
 ### Change pre-flashed config
 
