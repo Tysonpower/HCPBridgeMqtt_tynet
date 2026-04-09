@@ -13,6 +13,8 @@ You want to connect temperature sensors or something else? See our guide: [Conne
 
 You want to use the ESPHome-based firmware? See our guide: [Getting started with ESPHome](getting_started_esphome.md)
 
+If you have any issues have a look at our FAQ below [FAQ](#faq)
+
 ### What you need
 
 * Prebuilt PCB with HCPBridge Firmware installed (installed out of the box on tynet.eu PCBs)
@@ -99,3 +101,14 @@ Download: [Tynet E3 HCP Case](https://makerworld.com/en/models/1307115-tynet-hor
 PCBs from tynet.eu can be used with the Series 4 ESPHome based firmware as well, just follow our instructions on getting started with ESPHome, this also includes flashing instructions if you want to upgrade from the non-ESPHome version.
 
 [Getting started with ESPHome](getting_started_esphome.md)
+
+
+# FAQ
+
+Please look at this FAQ first if you have an issue, if this doesen't help feel free to contact us at support@tynet.eu.
+
+How can i reset the device?
+> If you use the default arduino based firmware just plugin to USB-C, after the 3V3 led is lit hold the BOOT button for more than 5 seconds and release it.
+
+How can i relfash the firmware of my board?
+> Just use our web flasher in Chrome or Edge, before using it hold the BOOT button and plugin the board via USB-C: [https://esp.tynet.eu/](https://esp.tynet.eu/)
