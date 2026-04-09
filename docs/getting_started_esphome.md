@@ -35,6 +35,7 @@ Our boards all ship with an Arduino-based based firmware, which can be easily up
 5. Confirm that you want to install it and wait until it completes.
 <img width="653" height="679" alt="image" src="https://github.com/user-attachments/assets/15da8071-48ae-4df6-bf04-a8970db5700c" />
 
+6. Disconnect USB-C and reconnect to power cycle the board after the flash. Done.
 
 ## Board setup
 
