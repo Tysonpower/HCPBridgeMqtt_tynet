@@ -24,18 +24,17 @@ The default login to the ESPHome provided WEBUI is user: `admin` and pass: `tyne
 
 Our boards all ship with an Arduino-based based firmware, which can be easily upgraded.
 
-1. Download the ESPHome-based firmware file: [hcpbridge.ota.bin](https://github.com/Tysonpower/HCPBridgeMqtt_tynet/blob/main/Firmware/esphome/hcpbridge-e4.ota.bin)
-2. Connect the board to power via the USB-C connector and wait a few seconds. The 3V3 LED will be lit.
-3. With a phone or a PC, search and connect to the Wi-Fi network called "HCPBRIDGE" created by the PCB.
-4. Open the OTA Web UI: [http://192.168.4.1/update](http://192.168.4.1/update)
-5. If asked, use the following credentials to login: `user: admin` and `pass: admin`
-6. Click "Select File", navigate to the downloaded `hcpbridge-e4.ota.bin` file\
+1. Press the BOOT button and onnect the board to power via the USB-C connector and wait a few seconds. The 3V3 LED will be lit.
+2. Open our web flasher in Chrome or Edge: [https://esp.tynet.eu/](https://esp.tynet.eu/)
+3. Click "Flash Now" on the "HCP Bridge for Series 4 (ESPHome)" Card
+<img width="653" height="679" alt="image" src="https://github.com/user-attachments/assets/be4dc41a-9e45-4062-a182-bccaa0934bd6" />
 
-   ![ElegantOTA upload page](Images/OTA-overview.png)
-7. Wait for the upload to complete\
+4. Follow the instructions on the screen and connect to the board, then click Install
+<img width="653" height="679" alt="image" src="https://github.com/user-attachments/assets/ecc544fa-8342-41ae-ae9a-56da5cfcc88e" />
 
-   ![ElegantOTA progress page](Images/OTA-progress.png)\
-   ![ElegantOTA success page](Images/OTA-success.png)
+5. Confirm that you want to install it and wait until it completes.
+<img width="653" height="679" alt="image" src="https://github.com/user-attachments/assets/15da8071-48ae-4df6-bf04-a8970db5700c" />
+
 
 ## Board setup
 
