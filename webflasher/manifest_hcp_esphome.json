@@ -1,0 +1,12 @@
+{
+  "name": "HCP Bridge for Series 4 (ESPHome)",
+  "version": "1.0.0",
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "Firmware/esphome/hcpbridge-e4.factory.bin", "offset": 0 }
+      ]
+    }
+  ]
+}

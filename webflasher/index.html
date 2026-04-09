@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP Firmware Flasher</title>
+    <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+    <style>
+        :root {
+            --primary: #00dc82;
+            --primary-dark: #00b068;
+            --accent: #36e4da;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        p {
+            color: var(--text-muted);
+            
+            font-size: 1.1rem;
+        }
+
+        .flasher-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .flash-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .flash-card h3 {
+            margin: 0 0 1.25rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        esp-web-install-button button[slot="activate"] {
+            appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+            font-family: inherit;
+            
+            background-image: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 220, 130, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        esp-web-install-button button[slot="activate"]:hover {
+            box-shadow: 0 6px 20px rgba(0, 220, 130, 0.5);
+            transform: scale(1.03);
+            background-image: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        }
+
+        esp-web-install-button button[slot="activate"]:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 10px rgba(0, 220, 130, 0.3);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 220, 130, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 220, 130, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 220, 130, 0); }
+        }
+        
+        esp-web-install-button button[slot="activate"]:hover {
+            animation: pulse 1.5s infinite;
+        }
+
+        .not-supported {
+            display: none;
+            color: #fb7185;
+            background: rgba(251, 113, 133, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border: 1px solid rgba(251, 113, 133, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Firmware Flasher</h1>
+        <p style="margin-bottom: 3rem;">Select the correct version for your board.</p>
+
+        <div class="flasher-grid">
+            
+            <div class="flash-card">
+                <h3>HCP Bridge for Series 4 (Arduino)</h3>
+                <p>This is the factory provided firmware that uses MQTT</p>
+                <esp-web-install-button manifest="./manifest_hcp_default.json">
+                    <button slot="activate">Flash Now</button>
+                </esp-web-install-button>
+            </div>
+
+            <div class="flash-card">
+                <h3>HCP Bridge for Series 4 (ESPHome)</h3>
+                <p>Recommended firmware for use with Home Assistant</p>
+                <esp-web-install-button manifest="./manifest_hcp_esphome.json">
+                    <button slot="activate">Flash Now</button>
+                </esp-web-install-button>
+            </div>
+
+        </div>
+
+        <div id="no-web-serial" class="not-supported">
+            Your Browser doesen't support WebSerial, please use Chrome or Edge.
+        </div>
+    </div>
+
+    <script>
+        // Einfacher Check, ob der Browser Web Serial unterstützt
+        if (!('serial' in navigator)) {
+            document.getElementById('no-web-serial').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

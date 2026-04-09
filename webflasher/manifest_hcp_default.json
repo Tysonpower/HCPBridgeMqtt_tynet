@@ -1,0 +1,12 @@
+{
+  "name": "HCP Bridge for Series 4 (Arduino)",
+  "version": "0.8.3",
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "Firmware/default/esp32s3_tynet_merged.bin", "offset": 0 }
+      ]
+    }
+  ]
+}
