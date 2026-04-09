@@ -24,12 +24,12 @@ The default login to the ESPHome provided WEBUI is user: `admin` and pass: `tyne
 
 Our boards all ship with an Arduino-based based firmware, which can be easily upgraded.
 
-1. Press the BOOT button and onnect the board to power via the USB-C connector and wait a few seconds. The 3V3 LED will be lit.
+1. Press the BOOT button and connect the board to power via the USB-C connector and wait a few seconds. The 3V3 LED will be lit.
 2. Open our web flasher in Chrome or Edge: [https://esp.tynet.eu/](https://esp.tynet.eu/)
 3. Click "Flash Now" on the "HCP Bridge for Series 4 (ESPHome)" Card
 <img width="653" height="679" alt="image" src="https://github.com/user-attachments/assets/be4dc41a-9e45-4062-a182-bccaa0934bd6" />
 
-4. Follow the instructions on the screen and connect to the board, then click Install
+4. Follow the instructions on the screen and connect to the board, then click install
 <img width="653" height="679" alt="image" src="https://github.com/user-attachments/assets/ecc544fa-8342-41ae-ae9a-56da5cfcc88e" />
 
 5. Confirm that you want to install it and wait until it completes.
