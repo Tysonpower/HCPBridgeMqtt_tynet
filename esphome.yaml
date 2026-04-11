@@ -122,6 +122,7 @@ switch:
 
 sensor:
   - platform: bme280_i2c
+    id: sensor_bme280
     temperature:
       name: "BME280 Temperature"
     pressure:
@@ -131,6 +132,7 @@ sensor:
     address: 0x76 # can be 0x77 as well
     update_interval: 30s
   - platform: dht
+    id: sensor_dht
     pin: GPIO04
     temperature:
       name: "DHT Temperature"
