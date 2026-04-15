@@ -125,10 +125,13 @@ sensor:
     id: sensor_bme280
     temperature:
       name: "BME280 Temperature"
+      id: sensor_bme280_temperature
     pressure:
       name: "BME280 Pressure"
+      id: sensor_bme280_pressure
     humidity:
       name: "BME280 Humidity"
+      id: sensor_bme280_humidity
     address: 0x76 # can be 0x77 as well
     update_interval: 30s
   - platform: dht
@@ -136,8 +139,10 @@ sensor:
     pin: GPIO04
     temperature:
       name: "DHT Temperature"
+      id: sensor_dht_temperature
     humidity:
       name: "DHT Humidity"
+      id: sensor_dht_humidity
     update_interval: 30s
 
 api:
