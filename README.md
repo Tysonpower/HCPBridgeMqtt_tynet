@@ -1,21 +1,41 @@
-# Hörmann HCPBridge with MQTT and Home Assistant Support
+# Buy a ready to use PCB on [shop.tynet.eu](https://shop.tynet.eu/rs485-bridge-diy-hoermann-mqtt-adapter-esp32-s3-dev-board) :rocket:
+
+If you use a PCB from us, you can get started with our instructions: [Getting started with tynet.eu PCBs](docs/getting_started_prebuilt_pcbs.md)
+
+Would you like to use our ESPHome-based firmware, which offers a few advantages? See our guide: [Getting started with ESPHome](docs/getting_started_esphome.md)
+
+You can find prebuild firmware for our boards in the Firmware folder as non-ESPHome as well as ESPHome version.
+
+# Hörmann HCPBridge for Home Assistant
+
 ![image](https://user-images.githubusercontent.com/14005124/215204028-66bb0342-6bc2-48dc-ad8e-b08508bdc811.png)
 
-Emulates Hörmann UAP1-HCP board (HCP2, Hörmann communication protocol 2) using an ESP32 and a RS485 converter, and exposes garage door controls over web page and MQTT.
+This repository includes firmware that emulates the Hörmann UAP1-HCP board (Series 4 motors) as well as the older UAP1 that is used for Series 3 motors.
+It uses a ESP32 with a RS485 converter and exposes garage door controls over a web page as well as Home Assistant (directly or MQTT).
 
-**Compatible with the following motors (UAP1-HCP / HCP2-Bus / Modbus):**
+## Firmware differences
 
-* SupraMatic E/P **Serie 4**
-* ProMatic **Serie 4**
-* [Rollmatic v2](docs/rollmatic_v2.md)
+All firmware is optimised for our boards, but it can be used with self build hardware as well with minimal modifications.
 
-It is **not** compatible with E**3** series motors. Previous generations use a different protocol (HCP1), different pin layout, and already have another supporting project (see [hgdo](https://github.com/steff393/hgdo), [hoermann_door](https://github.com/stephan192/hoermann_door) or [hormann-hcp](https://github.com/raintonr/hormann-hcp)).
+### Arduino based Firmware - Series 4 only
+
+Based on a fork of [Gifford47's](https://github.com/Gifford47/HCPBridgeMqtt) and other peoples work it offers a good MQTT based solution with a nice WEB UI and auto discovery for Home Assistant.
+This is the default Series 4 firmware for our boards and can also be used with other smart home systems as long as they support MQTT.
+
+
+### ESPHome based Firmware
+
+Based on a fork of [14yannick's](https://github.com/14yannick/esphome-hcpbridge) and other peoples work it is the best Solution if you use Home Assistant as it directly uses their API and doesen't need MQTT.
+Setup is really quick and the Firmware is more stable thanks to ESPome at it's core. Changing the FIrmware or adding Sensors is also simple using the yaml config and recompiling it in ESPHome.
+There are two different versions, one for Series 4 and one for Series 3 boards. For this reason we ship our Series 3 boards with the ESPHome based Firmware.
+If you don't use Home Assistant you can modify the yaml configuration to use MQTT as well - but you need to compile the firmware yourself to add your credentials.
+
 
 ## Functions
 
 * Get current status (door open/close/position, light on/off)
-* Support for ESP32-S1/S2/S3
-* Support multiple HCP Bridges for multiple garage doors
+* Support for ESP32-S3
+* Support multiple HCP Bridges for multiple garage doors (one bridge per motor)
 * HomeAssistant integration via MQTT-AutoDiscovery
 * Trigger actions via Web UI
   * light on/off
@@ -39,15 +59,6 @@ It is **not** compatible with E**3** series motors. Previous generations use a d
 
 <img src="docs/Images/webinterface.png" width="400" alt="Image of the Web UI">
 
-# Buy a ready to use PCB on [shop.tynet.eu](https://shop.tynet.eu/rs485-bridge-diy-hoermann-mqtt-adapter-esp32-s3-dev-board) :rocket:
-
-If you use a PCB from us, you can get started with our instructions: [Getting started with tynet.eu PCBs](docs/getting_started_prebuilt_pcbs.md)
-
-Would you like to use our ESPHome-based firmware, which offers a few advantages? See our guide: [Getting started with ESPHome](docs/getting_started_esphome.md)
-
-You can find prebuild firmware for our boards in the Firmware folder as non-ESPHome as well as ESPHome version.
-
-## ... or ...
 
 # Build it yourself! 🔨
 
