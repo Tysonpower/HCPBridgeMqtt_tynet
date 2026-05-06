@@ -1,8 +1,8 @@
 # Buy a ready to use PCB on [shop.tynet.eu](https://shop.tynet.eu/rs485-bridge-diy-hoermann-mqtt-adapter-esp32-s3-dev-board) :rocket:
 
-If you use a PCB from us, you can get started with our instructions: [Getting started with tynet.eu PCBs](docs/getting_started_prebuilt_pcbs.md)
+If you use a PCB from us, you can get started with our instructions: [Getting started with tynet.eu PCBs](https://github.com/Tysonpower/HCPBridgeMqtt_tynet/wiki)
 
-Would you like to use our ESPHome-based firmware, which offers a few advantages? See our guide: [Getting started with ESPHome](docs/getting_started_esphome.md)
+Would you like to use our ESPHome-based firmware, which offers a few advantages? See our guide: [Getting started with ESPHome](https://github.com/Tysonpower/HCPBridgeMqtt_tynet/wiki/Upgrade-Firmware)
 
 You can find prebuild firmware for our boards in the Firmware folder as non-ESPHome as well as ESPHome version.
 
