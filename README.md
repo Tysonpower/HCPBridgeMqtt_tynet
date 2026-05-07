@@ -6,14 +6,20 @@ Would you like to use our ESPHome-based firmware, which offers a few advantages?
 
 You can find prebuild firmware for our boards in the Firmware folder as non-ESPHome as well as ESPHome version.
 
+<br>
+
 # Hörmann HCPBridge for Home Assistant
 
 This repository includes firmware that emulates the Hörmann UAP1-HCP board (Series 4 motors) as well as the older UAP1 that is used for Series 3 motors.
 It uses a ESP32 with a RS485 converter and exposes garage door controls over a web page as well as Home Assistant (directly or MQTT).
 
+<br>
+
 ## Firmware Options
 
 All firmware is optimised for our boards, but it can be used with self build hardware as well with minimal modifications.
+
+<br>
 
 ### Arduino based Firmware - Series 4 only
 
@@ -21,6 +27,7 @@ Based on a fork of [Gifford47's](https://github.com/Gifford47/HCPBridgeMqtt) and
 
 This is the default Series 4 firmware for our boards and can also be used with other smart home systems as long as they support MQTT.
 
+<br>
 
 ### ESPHome based Firmware
 
@@ -30,6 +37,7 @@ Setup is really quick and the Firmware is more stable thanks to ESPome at it's c
 There are two different versions, one for Series 4 and one for Series 3 boards. For this reason we ship our Series 3 boards with the ESPHome based Firmware.
 If you don't use Home Assistant you can modify the yaml configuration to use MQTT as well - but you need to compile the firmware yourself to add your credentials.
 
+<br>
 
 ## Features
 - Read door status: open/closed/position, light on/off  
@@ -42,6 +50,8 @@ If you don't use Home Assistant you can modify the yaml configuration to use MQT
 - Efficient MQTT traffic (only publish on state change)  
 - Support multiple HCP Bridges for multiple garage doors (one bridge per motor)
 - Support for ESP32-S3
+
+<br>
 
 ## Web UI (Arduino based Firmware)
 
