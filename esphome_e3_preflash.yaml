@@ -36,9 +36,6 @@ esphome:
 external_components:
   - source: github://Tysonpower/hoermann_door
     refresh: 0s
-  - source: github://esphome/esphome@2025.9.3
-    refresh: 0s
-    components: [uart]
 
 esp32:
   variant: esp32s3
@@ -57,8 +54,6 @@ wifi:
   ap: {} # This spawns an AP with the device name and mac address with no password.
 
 captive_portal:
-
-improv_serial:
 
 api:
   

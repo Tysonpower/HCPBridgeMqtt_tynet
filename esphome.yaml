@@ -30,9 +30,6 @@ esphome:
 external_components:
   - source: github://Tysonpower/esphome-hcpbridge
     refresh: 0s
-  - source: github://esphome/esphome@2025.9.3
-    refresh: 0s
-    components: [uart]
 
 esp32:
   variant: esp32s3
@@ -146,8 +143,6 @@ sensor:
     update_interval: 30s
 
 api:
-  encryption:
-    key: !secret api_key
   services:
     - service: go_to_open
       then:
@@ -185,13 +180,10 @@ wifi:
 
 captive_portal:
 
-improv_serial:
-
 # Enable logging
 logger:
   level: DEBUG
   baud_rate: 9600
 
-# Example configuration entry
 ota:
   - platform: esphome
