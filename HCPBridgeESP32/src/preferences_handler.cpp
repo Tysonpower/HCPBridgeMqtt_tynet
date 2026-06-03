@@ -97,8 +97,6 @@ void PreferenceHandler::initPreferences() {
     this->preferences->begin("hcpbridgeesp32", false);
     this->firstStart = !preferences->getBool(preference_started_before);
 
-    preferences->putString(preference_wifi_ap_password, AP_PASSWD);
-
     if (this->firstStart) {
         preferences->putBool(preference_started_before, true);
         for (size_t i = 0; i < PREF_REGISTRY_SIZE; i++) {
