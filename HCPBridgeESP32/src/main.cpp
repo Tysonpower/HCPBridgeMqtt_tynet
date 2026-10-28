@@ -494,7 +494,16 @@ void setup() {
 
     ElegantOTA.begin(&server);
     ElegantOTA.setAutoReboot(true);
-    ElegantOTA.setAuth(OTA_USERNAME, OTA_PASSWD);
+    // Protect OTA with the web UI login, so its password can be changed in the
+    // UI (saveConf() restarts, so a new one applies at once). Fall back to the
+    // compiled-in OTA login while no web password is set, because ElegantOTA
+    // disables auth for an empty password.
+    String webpass = localPrefs->getString(preference_www_password);
+    if (webpass != "") {
+        ElegantOTA.setAuth(WWW_USER, webpass.c_str());
+    } else {
+        ElegantOTA.setAuth(OTA_USERNAME, OTA_PASSWD);
+    }
 
     server.addHandler(&events);
     server.begin();
