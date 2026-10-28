@@ -294,6 +294,10 @@ URL: **http://[deviceip]/sysinfo**
 URL: **http://[deviceip]/update**
 <br>
 
+Log in with the web UI credentials: user `admin` and the password set in the Basic Configuration.
+While no web password is set, the OTA login from `configuration.h` (`OTA_USERNAME`/`OTA_PASSWD`, default `admin`/`admin`) applies instead.
+<br>
+
 ![image](https://user-images.githubusercontent.com/14005124/215216505-8c5abe46-5d40-402b-963a-e3825c63d417.png)
 
 </details><br>
