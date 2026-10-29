@@ -18,7 +18,7 @@ esphome:
   name_add_mac_suffix: true
   project:
     name: "tynet.hcpbridge_e4"
-    version: "1.0.8"
+    version: "1.0.9"
   libraries:
     - emelianov/modbus-esp8266
   platformio_options:
